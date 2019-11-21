@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="css/materialize.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <title>Очередь: авторизация</title>
+</head>
+<body id="auth"> 
+<div class="preloader">
+    <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main id="authMain">
+    <div class="card" id="authCards">
+        <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="img/queue.jpg">
+        </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Авторизуйтесь в системе<i class="material-icons right">more_vert</i></span>
+            <p>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="loginUser" type="text" class="validate">
+                                <label for="loginUser">Логин</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="passUser" type="password" class="validate">
+                                <label for="passUser">Приватный ключ</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <a class="waves-effect waves-light btn" onclick="auth();">Войти</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </p>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Ответы на вопросы<i class="material-icons right">close</i></span>
+            <p>Если вы потеряли приватный ключ, обратитесь к поддержки или зарегистрируйтесь заного.</p>
+        </div>
+    </div>
+</main>
+
+
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/main.js"></script>
+</html>
