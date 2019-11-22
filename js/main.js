@@ -153,7 +153,7 @@ function renderParameter(){
             return;      
             break;
     }
-    let rowsId = function(){return $(".parameters").length + 1}(),
+    let rowsId = function(){return $(".parameters").length}(),
     tableRowHtml = '<tr data-id="'+rowsId+'" class="parameters">'
         +'<td>'             
             +'<div class="input-field">'
@@ -163,7 +163,7 @@ function renderParameter(){
         +'<td>'
             +'<p>'
                 +'<label>'
-                    +'<input class="parameterSort" data-id="'+rowsId+'" type="checkbox" '+function(){return rows.sort.disabled == true ? 'disabled' : ''}()+' />'
+                    +'<input class="parameterSort" onclick="logicParameterDisabled(1, '+rowsId+')" data-id="'+rowsId+'" type="checkbox" '+function(){return rows.sort.disabled == true ? 'disabled' : ''}()+' />'
                     +'<span></span>'
                 +'</label>'
             +'</p>'
@@ -171,7 +171,7 @@ function renderParameter(){
         +'<td>'
             +'<div class="input-field">'
                 +'<input data-id="'+rowsId+'" type="number" '+function(){return rows.prioritySort.disabled == true ? 'disabled' : ''}()+' value="'
-                + function(){return $(".parameters[disabled='']").length + 1}()             
+                + function(){return $(".parameters[disabled='']").length}()             
                 +'" class="parameterPrioritySort">'
             +'</div>'
         +'</td>'
@@ -188,7 +188,7 @@ function renderParameter(){
         +'<td>'
             +'<p>'
                 +'<label>'
-                    +'<input data-id="'+rowsId+'" class="parameterObligatory" type="checkbox" '+function(){return rows.obligatory.disabled == true ? 'disabled' : ''}()+' />'
+                    +'<input data-id="'+rowsId+'" onclick="logicParameterDisabled(2, '+rowsId+')" class="parameterObligatory" type="checkbox" '+function(){return rows.obligatory.disabled == true ? 'disabled' : ''}()+' />'
                     +'<span></span>'
                 +'</label>'
             +'</p>'
@@ -196,7 +196,7 @@ function renderParameter(){
         +'<td>'
             +'<p>'
                 +'<label>'
-                    +'<input data-id="'+rowsId+'" class="parameterHidden" type="checkbox" '+function(){return rows.hidden.disabled == true ? 'disabled' : ''}()+' />'
+                    +'<input data-id="'+rowsId+'" onclick="logicParameterDisabled(3, '+rowsId+')" class="parameterHidden" type="checkbox" '+function(){return rows.hidden.disabled == true ? 'disabled' : ''}()+' />'
                     +'<span></span>'
                 +'</label>'
             +'</p>'        
@@ -210,6 +210,37 @@ function renderParameter(){
     $('#custom-modal').modal("close");
 }
 
-function logicParameterDisabled (){
-
+function logicParameterDisabled (numberUsedLogical, idParameter){
+    switch(numberUsedLogical){
+        case 1:
+            if ($('.parameterSort[data-id='+idParameter+']').prop("checked")){
+                $('.parameterPrioritySort[data-id='+idParameter+']').prop('disabled', false);
+                $('.parameterSortOrder[data-id='+idParameter+']').prop('disabled', false);
+            }
+            else {
+                $('.parameterPrioritySort[data-id='+idParameter+']').val(0)
+                $('.parameterPrioritySort[data-id='+idParameter+']').prop('disabled', true);
+                $('.parameterSortOrder[data-id='+idParameter+']').prop('disabled', true);
+            }
+            $('.parameterPrioritySort[data-id='+idParameter+']')
+            break;
+        case 2:
+            if ($('.parameterObligatory[data-id='+idParameter+']').prop("checked")){
+                $('.parameterHidden[data-id='+idParameter+']').prop('disabled', true);
+                $('.parameterHidden[data-id='+idParameter+']').prop("checked", false);
+            }
+            else {
+                $('.parameterHidden[data-id='+idParameter+']').prop('disabled', false);
+            }
+            break;
+        case 3:
+            if ($('.parameterHidden[data-id='+idParameter+']').prop("checked")){
+                $('.parameterObligatory[data-id='+idParameter+']').prop('disabled', true);
+                $('.parameterObligatory[data-id='+idParameter+']').prop("checked", false);
+            }
+            else {
+                $('.parameterObligatory[data-id='+idParameter+']').prop('disabled', false);
+            }
+            break;
+    }
 }
